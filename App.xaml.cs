@@ -18,11 +18,12 @@ namespace PillMe
                 return database;
             }
         }
+        [Obsolete]
         public App()
         {
             MainPage = new Shell
             {
-                CurrentItem = new DoctorListPage()
+                CurrentItem = new MainPage()
             };
         }
     }

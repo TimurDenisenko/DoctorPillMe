@@ -1,9 +1,73 @@
+﻿using PillMe.Models;
+
 namespace PillMe.Views;
 
 public partial class MainPage : ContentPage
 {
-	public MainPage()
+    Entry password, login;
+    CheckBox passwordVisibleBox;
+    Label passwordVisible, passwordLabel, loginLabel;
+    Button sisse;
+    User user;
+
+    [Obsolete]
+    public MainPage()
 	{
-		InitializeComponent();
+        loginLabel = new Label { Text = "Kasutaja nimi"};
+        passwordLabel = new Label{ Text = "Parool"};
+        passwordVisible = new Label { Text = "Näita parool" };
+        login = new Entry();
+        password = new Entry { IsPassword = true };
+        passwordVisibleBox = new CheckBox { };
+        passwordVisibleBox.CheckedChanged += PasswordVisibleBox_CheckedChanged;
+        sisse = new Button { Text = "Logi sisse" };
+        sisse.Clicked += Sisse_Clicked;
+        Content = new StackLayout
+        {
+            Children = { loginLabel, login, passwordLabel, password, new HorizontalStackLayout { Children = { passwordVisible, passwordVisibleBox } }, sisse }
+        };
 	}
+
+    [Obsolete]
+    private async void Sisse_Clicked(object sender, EventArgs e)
+    {
+        user = App.Database.GetUsers()?.Where(x => x.Name == login.Text)?.ToArray()?[0] ?? null;
+        if (user != null && PasswordSecurity.VerifyPassword(password.Text, user.HashPassword, user.Salt))
+            Pages();
+        else
+            await DisplayAlert("Viga","Vale kasutaja nimi või parool","Tühista");
+    }
+
+    private void PasswordVisibleBox_CheckedChanged(object sender, CheckedChangedEventArgs e) => password.IsPassword = !passwordVisibleBox.IsChecked;
+
+    [Obsolete]
+    private void Pages()
+	{
+        StackLayout st = new StackLayout();
+        List<Button> pages = new List<Button>();
+        if (user.Role == "Doctor" || user.Role == "Admin")
+        {
+            Button users = new Button { Text = "Kasutajad" };
+            users.Clicked += async (s, e) => await Navigation.PushAsync(new UserListPage());
+            pages.Add(users);
+            Button pills = new Button { Text = "Tabletid" };
+            pills.Clicked += async (s, e) => await Navigation.PushAsync(new PillListPage());
+            pages.Add(pills);
+            if (user.Role == "Admin")
+            {
+                Button doctors = new Button { Text = "Arstid" };
+                doctors.Clicked += async (s, e) => await Navigation.PushAsync(new DoctorListPage());
+                pages.Add(doctors);
+            }
+        }
+        Button exit = new Button { Text = "Logi välja" };
+        exit.Clicked += (s, e) => Application.Current.MainPage = new MainPage(); ;
+        pages.Add(exit);
+        foreach (Button item in pages)
+        {
+            item.Margin = 30;
+            st.Children.Add(item);
+        }
+        Content = st;
+    }
 }

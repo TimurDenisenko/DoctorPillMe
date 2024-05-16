@@ -31,7 +31,7 @@ namespace PillMe.Models
             database.Table<User>().ToList();
         public User GetUser(int id) =>
             database.Get<User>(id);
-        public int DeleteItem(int id) =>
+        public int DeleteUser(int id) =>
             database.Delete<User>(id);
         public int SaveUser(User item)
         {

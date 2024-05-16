@@ -4,7 +4,8 @@ namespace PillMe.Views;
 
 public partial class UserListPage : ContentPage
 {
-	public UserListPage()
+    public readonly string Role = "Doctor";
+    public UserListPage()
 	{
 		InitializeComponent();
 	}

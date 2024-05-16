@@ -34,7 +34,7 @@ public partial class UserPage : ContentPage
     private void DeleteUser(object sender, EventArgs e)
     {
         User User = (User)BindingContext;
-        App.Database.DeletePill(User.Id);
+        App.Database.DeleteUser(User.Id);
         Navigation.PopAsync();
     }
 

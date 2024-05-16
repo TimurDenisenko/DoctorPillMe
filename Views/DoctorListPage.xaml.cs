@@ -4,7 +4,8 @@ namespace PillMe.Views;
 
 public partial class DoctorListPage : ContentPage
 {
-	public DoctorListPage()
+    public readonly string Role = "Admin";
+    public DoctorListPage()
 	{
 		InitializeComponent();
 	}
@@ -23,7 +24,7 @@ public partial class DoctorListPage : ContentPage
     private async void CreateUser(object sender, EventArgs e)
     {
         User User = new User();
-        UserPage UserPage = new UserPage();
+        DoctorPage UserPage = new DoctorPage();
         UserPage.BindingContext = User;
         await Navigation.PushAsync(UserPage);
     }

@@ -15,6 +15,7 @@ public partial class DoctorPage : ContentPage
         InitializeComponent();
         ViewModel = pm;
         BindingContext = ViewModel;
+        
     }
     [Obsolete]
     private void SaveUser(object sender, EventArgs e)
