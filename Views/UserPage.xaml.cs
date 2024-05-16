@@ -21,14 +21,14 @@ public partial class UserPage : ContentPage
     {
         User User = (User)BindingContext;
         if (new string[] { User.Name, User.HashPassword }.All(x => !string.IsNullOrEmpty(x)))
-            App.Database.SaveItem(User);
+            App.Database.SaveUser(User);
         Navigation.PopAsync();
     }
 
     private void DeleteUser(object sender, EventArgs e)
     {
         User User = (User)BindingContext;
-        App.Database.DeleteItem(User.Id);
+        App.Database.DeletePill(User.Id);
         Navigation.PopAsync();
     }
 

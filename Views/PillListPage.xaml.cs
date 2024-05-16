@@ -10,7 +10,7 @@ public partial class PillListPage : ContentPage
 	}
     protected override void OnAppearing()
     {
-        PillsList.ItemsSource = App.Database.GetItems();
+        PillsList.ItemsSource = App.Database.GetPills();
         base.OnAppearing();
     }
     private async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)

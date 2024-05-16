@@ -10,6 +10,8 @@
         <Entry Text="{Binding Description}"/>
         <Label Text="Kogus"/>
         <Entry Text="{Binding Amount}" Keyboard="Numeric"/>
+        <Label Text="Üksus"/>
+        <Entry Text="{Binding Unit}" Keyboard="Numeric"/>
         <Label Text="Hind"/>
         <Entry Text="{Binding Price}" Keyboard="Numeric"/>
         <HorizontalStackLayout>

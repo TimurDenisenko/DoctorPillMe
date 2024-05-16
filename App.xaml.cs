@@ -6,14 +6,14 @@ namespace PillMe
     public partial class App : Application
     {
         public const string DATABASE_NAME = "pills.db";
-        public static PillRepository database;
-        public static PillRepository Database
+        public static Repository database;
+        public static Repository Database
         {
             get
             {
                 if (database == null)
                 {
-                    database = new PillRepository(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), DATABASE_NAME));
+                    database = new Repository(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), DATABASE_NAME));
                 }
                 return database;
             }

@@ -52,6 +52,16 @@ namespace PillMe.ViewModels
                 OnPropertyChanged("Amount");
             }
         }
+        public string Unit
+        {
+            get { return Pill.Unit; }
+            set
+            {
+                if (Pill.Unit == value) return;
+                Pill.Unit = value;
+                OnPropertyChanged("Unit");
+            }
+        }
         public decimal Price
         {
             get { return Pill.Price; }
@@ -66,7 +76,7 @@ namespace PillMe.ViewModels
         {
             get
             {
-                return new string[] { Name, Description, Amount.ToString(), Price.ToString() }.Any(x => !string.IsNullOrEmpty(x?.Trim()));
+                return new string[] { Name, Description, Amount == 0 ? "" : "fill", Unit, Price == 0 ? "" : "fill" }.Any(x => !string.IsNullOrEmpty(x?.Trim()));
             }
         }
 
