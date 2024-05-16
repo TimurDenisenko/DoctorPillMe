@@ -42,6 +42,16 @@ namespace PillMe.ViewModels
                 OnPropertyChanged("HashPassword");
             }
         }
+        public byte[] Salt
+        {
+            get { return User.Salt; }
+            set
+            {
+                if (User.Salt == value) return;
+                User.Salt = value;
+                OnPropertyChanged("Salt");
+            }
+        }
         public bool IsValid
         {
             get

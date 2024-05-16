@@ -3,14 +3,14 @@ using PillMe.ViewModels;
 
 namespace PillMe.Views;
 
-public partial class UserPage : ContentPage
+public partial class DoctorPage : ContentPage
 {
     public UserViewModel ViewModel { get; private set; }
-    public UserPage()
+    public DoctorPage()
     {
         InitializeComponent();
     }
-    public UserPage(UserViewModel pm)
+    public DoctorPage(UserViewModel pm)
     {
         InitializeComponent();
         ViewModel = pm;
@@ -25,7 +25,7 @@ public partial class UserPage : ContentPage
             Tuple<string, byte[]> password = PasswordSecurity.HashPassword(User.HashPassword);
             User.HashPassword = password.Item1;
             User.Salt = password.Item2;
-            User.Role = "User";
+            User.Role = "Doctor";
             App.Database.SaveUser(User);
         }
         Navigation.PopAsync();

@@ -22,7 +22,7 @@ namespace PillMe
         {
             MainPage = new Shell
             {
-                CurrentItem = new PillListPage()
+                CurrentItem = new DoctorListPage()
             };
         }
     }

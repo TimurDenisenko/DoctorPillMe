@@ -61,6 +61,15 @@
 	    <AutoGen>True</AutoGen>
 	    <DependentUpon>Resources.resx</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\DoctorListPage.xaml.cs">
+	    <DependentUpon>DoctorListPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\UserListPage.xaml.cs">
+	    <DependentUpon>UserListPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\DoctorPage.xaml.cs">
+	    <DependentUpon>DoctorPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\UserPage.xaml.cs">
 	    <DependentUpon>UserPage.xaml</DependentUpon>
 	  </Compile>
@@ -74,7 +83,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Views\MainPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\DoctorListPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\UserListPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\PillListPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\DoctorPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\UserPage.xaml">
