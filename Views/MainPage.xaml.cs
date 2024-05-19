@@ -41,7 +41,7 @@ public partial class MainPage : ContentPage
     private void PasswordVisibleBox_CheckedChanged(object sender, CheckedChangedEventArgs e) => password.IsPassword = !passwordVisibleBox.IsChecked;
 
     [Obsolete]
-    private void Pages()
+    private async void Pages()
 	{
         StackLayout st = new StackLayout();
         List<Button> pages = new List<Button>();
@@ -56,13 +56,15 @@ public partial class MainPage : ContentPage
             if (user.Role == "Admin")
             {
                 Button doctors = new Button { Text = "Arstid" };
-                doctors.Clicked += async (s, e) => await Navigation.PushAsync(new DoctorListPage());
+                doctors.Clicked += async (s, e) => await Navigation.PushAsync(new DoctorListPage()); 
                 pages.Add(doctors);
             }
         }
-        Button exit = new Button { Text = "Logi välja" };
-        exit.Clicked += (s, e) => Application.Current.MainPage = new MainPage(); ;
-        pages.Add(exit);
+        else
+        {
+            await DisplayAlert("Hoiatus", "See rakendus pole mõeldud kasutajatele, vaid arstidele. Laadige alla PillMe.","Tühista");
+            return;
+        }
         foreach (Button item in pages)
         {
             item.Margin = 30;
