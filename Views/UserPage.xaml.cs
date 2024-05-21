@@ -17,27 +17,34 @@ public partial class UserPage : ContentPage
         BindingContext = ViewModel;
     }
     [Obsolete]
-    private void SaveUser(object sender, EventArgs e)
+    private async void SaveUser(object sender, EventArgs e)
     {
-        User User = (User)BindingContext;
-        if (new string[] { User.Name, User.HashPassword }.All(x => !string.IsNullOrEmpty(x)))
+        try
         {
-            Tuple<string, byte[]> password = PasswordSecurity.HashPassword(User.HashPassword);
-            User.HashPassword = password.Item1;
-            User.Salt = password.Item2;
-            User.Role = "User";
-            App.Database.SaveUser(User);
+            User User = (User)BindingContext;
+            if (new string[] { User.Name, User.HashPassword }.All(x => !string.IsNullOrEmpty(x)))
+            {
+                Tuple<string, byte[]> password = PasswordSecurity.HashPassword(User.HashPassword);
+                User.HashPassword = password.Item1;
+                User.Salt = password.Item2;
+                User.Role = "User";
+                App.Database.SaveUser(User);
+            }
+            await Navigation.PopAsync();
         }
-        Navigation.PopAsync();
+        catch (Exception)
+        {
+            await DisplayAlert("Viga","Midagi on vale","Tühista");
+        }
     }
 
-    private void DeleteUser(object sender, EventArgs e)
+    private async void DeleteUser(object sender, EventArgs e)
     {
         User User = (User)BindingContext;
         App.Database.DeleteUser(User.Id);
-        Navigation.PopAsync();
+        await Navigation.PopAsync();
     }
 
-    private void Cancel(object sender, EventArgs e) =>
-        Navigation.PopAsync();
+    private async void Cancel(object sender, EventArgs e) =>
+        await Navigation.PopAsync();
 }

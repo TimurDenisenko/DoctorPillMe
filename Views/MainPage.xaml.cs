@@ -31,11 +31,16 @@ public partial class MainPage : ContentPage
     [Obsolete]
     private async void Sisse_Clicked(object sender, EventArgs e)
     {
-        user = App.Database.GetUsers()?.Where(x => x.Name == login.Text)?.ToArray()?[0] ?? null;
-        if (user != null && PasswordSecurity.VerifyPassword(password.Text, user.HashPassword, user.Salt))
-            Pages();
-        else
-            await DisplayAlert("Viga","Vale kasutaja nimi või parool","Tühista");
+        try
+        {
+            user = App.Database.GetUsers().Where(x => x.Name == login.Text).ToArray()[0];
+            if (user != null && PasswordSecurity.VerifyPassword(password.Text, user.HashPassword, user.Salt))
+                Pages();
+        }
+        catch (Exception)
+        {
+            await DisplayAlert("Viga", "Vale kasutaja nimi või parool", "Tühista");
+        }
     }
 
     private void PasswordVisibleBox_CheckedChanged(object sender, CheckedChangedEventArgs e) => password.IsPassword = !passwordVisibleBox.IsChecked;
