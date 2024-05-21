@@ -11,7 +11,8 @@
         <Label Text="Kogus"/>
         <Entry Text="{Binding Amount}" Keyboard="Numeric"/>
         <Label Text="Üksus"/>
-        <Entry Text="{Binding Unit}" Keyboard="Numeric"/>
+        <Entry Text="{Binding Unit}" x:Name="entryUnit"/>
+        <ListView x:Name="listUnits" HeightRequest="50" VerticalOptions="Start" />
         <Label Text="Hind"/>
         <Entry Text="{Binding Price}" Keyboard="Numeric"/>
         <HorizontalStackLayout>

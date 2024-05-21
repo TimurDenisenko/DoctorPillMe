@@ -9,12 +9,24 @@ public partial class PillPage : ContentPage
     public PillPage()
     {
         InitializeComponent();
+        Units();
     }
     public PillPage(PillViewModel pm)
     {
         InitializeComponent();
+        Units();
         ViewModel = pm;
         BindingContext = ViewModel;
+    }
+    private void Units()
+    {
+        listUnits.ItemsSource = new string[] { "Tabletid", "Kapslid", "Ampullid", "Viaalid", "Rektaalsuposiidid", "Salvid", "Geelid", "Aerosoolid", "Pihustid", "Süstelahused", "Infusioonilahused" };
+        listUnits.ItemSelected += ListUnits_ItemSelected;
+    }
+
+    private void ListUnits_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+    {
+        entryUnit.Text = e.SelectedItem.ToString();
     }
 
     private void SavePill(object sender, EventArgs e)
